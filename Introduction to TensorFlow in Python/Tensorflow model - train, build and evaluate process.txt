@@ -25,7 +25,7 @@ For Functional API:
   Step 1: Create layers for mutiple inputs -- include the layers for output nodes, activation function and input layer
 	 `tf.keras.layers.Dense(16, activation=relu)(input_layer)`
   Step 2: Use the add() operation to combine the outputs of model 1 and model 2.
-	 `merged = keras.layers.add([m1_layer2, m2_layer2])`
+	 `merged = tf.keras.layers.add([m1_layer2, m2_layer2])`
   Step 3: Define functional model
 	 `model = tf.keras.Model(inputs=[m1_inputs, m2_inputs], outputs=merged)`
   Step 4: Train the model / Minimization
