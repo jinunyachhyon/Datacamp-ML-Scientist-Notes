@@ -1,0 +1,63 @@
+Step 1: Specifying the model architecture
+Layers: - Dense layer
+	- Dropout layer (For regularization, it drops weight from pervious node to next node to overcome overfitting)
+	- Batch Normalization layer (It's job is to take the outputs from the first hidden layer and normalize them before passing them on as the input of the next hidden layer.
+				     It solves a major problem called internal covariate shift. 
+				     An internal covariate shift occurs when there is a change in the input distribution to our network. 
+				     When the input distribution changes, hidden layers try to learn to adapt to the new distribution. 
+				     This slows down the training process. If a process slows down, it takes a long time to converge to a global minimum.
+				     So, with Batch Normalization, you can use a higher learning rate which speeds up the process and it also has a regularizing effect which means you can often remove dropout.)
+                                   					     
+
+Step 2: Compile the model
+Parameters: Optimizer = "adam", "sgd", "RMSprop", Loss = "binary_crossentropy", "categorical_crossentropy"
+All the optimizer have "learning rate" that regulates the weights of our neural network concerning the loss gradient.
+- For Adam optimizer, "beta1" --> increase this to slower the decay rate of momentum
+- For RMSprop optimizer, "momentum" and "decay" --> higher decay, increases decay of momentum and vice-versa.
+
+
+Step 3: Fit the model
+Parameters: - Features and labels
+	    - epochs
+	    - validation_split, validation_data
+	    - callbacks: History-->gives training history, Early Stopping-->stops the training earlier if no improvement is observed, Model checkpoint-->Saves the best model
+	    - batch_size
+eg. model.fit(X_train,y_train, epochs=30, validation_split=0.2 or validation_data=(X_test,y_test), callbacks=[...], bacth_size=64)
+Here, training data is being fit in the model with 30 epochs. 
+Considering there are 400 records in training data, with 64 batch_size, in each epoch there are 400/64 = 7 iterations.
+Among total training data, 20% are used for validation or testing data is used for validation.
+
+
+Step 4: Evaluate test data
+model.evaluate(X_test, y_test)
+
+
+Step 5: Predict using the model
+model.predict(X_new)
+
+
+Step 6: Hyperparamter Tuning 
+  Tune: - no. of neurons in each layers
+	- no. of hidden layers
+	- optimizer
+	- learning_rate
+	- activation
+	- epochs
+	- batch_size
+
+  1) Turn Keras model into a Sklearn estimator
+# Define a function to create the model (Include: Specification of model, Compile the model, Return the model)
+# Create an instance of the KerasClassifier / KerasRegressor
+eg. model = KerasClassifier(build_fn=create_model)
+
+ 2) Random search or Grid Search on Keras models
+# Define the hyperparameter grid
+# Create an instance of GridSearchCV / RandomSearchCV
+# Fit the data to perform hyperparameter tuning
+# Print the best hyperparameters
+
+Note: Turn keras model into a SKlearn estimator documentation
+https://faroit.com/keras-docs/1.0.6/scikit-learn-api/#wrappers-for-the-scikit-learn-api
+
+
+
