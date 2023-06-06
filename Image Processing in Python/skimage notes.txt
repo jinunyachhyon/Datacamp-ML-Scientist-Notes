@@ -1,0 +1,62 @@
+**Chapter-1**
+1. Import images from the library : from skimage import data | eg.data.rocket()
+
+2. Flip vertically - np.flipud
+3. Flip horizontally - np.fliplr
+
+4. Thresholding Image: (Should be converted into grayscale) | from skimage.filters 
+	- Global thresholding - Use `threshold_otsu` function to calculate threshold
+	- Local Thresholding - Use `threshold_local` function to calculate threshold
+
+
+**Chapter-2**
+1. Edge Detection - `sobel` algorithm | from skimage.filters
+
+2. Gaussian Smoothing - `gaussian` | from skimage.filters
+
+3. Contrast enhancement: from skimage import exposure
+	- Histogram equalization: `exposure.equalize_hist`
+	- Contrast Limited Adaptive Histogram Equalization (CLAHE): `exposure.equalize_adapthist`
+
+4. Transformation: from skimage.transform
+	- Rotation: `rotate`
+	- Rescale: `rescale`
+	- Resize: `resize`
+
+
+5. Morphology :(Should be converted into grayscale) | from skimage import morphology
+	- Erosion :  `morphology.binary_erosion`
+	- Dilation: `morphology.binary_dilation`
+
+
+**Chapter-3**
+1. Image Restoration: from skimage.restoration import inpaint
+	Step 1: Create mask for the pixels to restore
+	Step 2: Inpaint the masked area | `inpaint.inpaint_biharmonic`
+
+2. Apply random noise: `random_noise` | from skimage.util
+
+3. Denoising: from skimage.restoration
+	- Total Variation filter algorithm: `denoise_tv_chambolle`
+	- Bilateral filter algorithm: `denoise_bilateral`
+
+4. Segmentation
+	Step 1: Obtain segments using `slic` | from skimage.segmentation
+	Step 2: Put segments on top of original image using `label2rgb` | from skimage.color
+
+5. Finding Contours
+	Step 1: Transform the image to 2D grayscale
+	Step 2: Binarize the image (using thresholding)
+	Step 3: Use `measure.find_contours` to find contours | from skimage import measure
+
+
+**Chapter-4**
+1. Edge Detection:(Should be converted into grayscale)| `canny` | from skimage.feature
+
+2. Corner Detection: (Should be converted into grayscale)| `corner_harris` | from skimage.feature
+
+3. Detecting faces: 
+	Step 1: Load trained file: trained_file = data.lbp_frontal_face_cascade_filename()
+	Step 2: Initialize detector cascade: detector = Cascade(trained_file) | from skimage.feature import Cascade
+	Step 3: Apply detector on the image: detector.detect_multi_scale()
+	
